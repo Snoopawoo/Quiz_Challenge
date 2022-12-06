@@ -115,25 +115,21 @@ function checkCorrect(event) {
 };
 
 //Add final score to Scoreboard (local storage)
-var highScore = {
-    name: '',
-    uScore: 0
-};
-
+var highScore= [{}];
+var user;
+var uScore;
 function scoreValues(){
-    //window.location.href = "highscores.html";
-
-    var initials = document.getElementById('userInput');
-    highScore.name = 'fluffy';
-    console.log(initials);
-    console.log(highScore.name);
-    highScore.uScore += time;
+    window.location.href = "highscores.html";
+    document.querySelector('#initials').value;
+    user = document.querySelector('#initials').value;
+    highScore[0].user = user;
+    console.log(highScore);
+    uScore = time;
+    highScore[0].uScore = uScore;
     console.log(highScore.uScore);
+    localStorage.setItem('user_highScore', JSON.stringify(highScore));
 
 };
- 
-//localStorage.setItem('user_highScore', JSON.stringify(highScore));
-//var highScores = JSON.parse(localStorage.getItem('user_highScore'));
 
 //Event listeners
 choiceList.addEventListener('click', checkCorrect);
