@@ -7,6 +7,7 @@ var questionLine = document.querySelector('#question-title');
 var choiceList = document.querySelector('#choices');
 var startScreen = document.querySelector('#start-screen');
 var startBtn = document.querySelector('#start');
+var submitBtn = document.querySelector('#submit')
 var feedback = document.querySelector('#feedback');
 var endScreen = document.querySelector('#end-screen');
 var finalScore = document.querySelector('#final-score');
@@ -79,10 +80,14 @@ function checkCorrect(event) {
 
     //shows if the answer is correct or not and acts accordingly
     if(state == 'true'){
+        var audioGood = new Audio('assets/sfx/correct.wav');
+        audioGood.play();
         feedback.classList.remove('hide');
         feedback.innerHTML = 'Correct';
     } 
     else {
+        var audioBad = new Audio('assets/sfx/incorrect.wav');
+        audioBad.play();
         feedback.classList.remove('hide');
         feedback.innerHTML = 'Wrong';
         if(time >= 11){
@@ -110,12 +115,27 @@ function checkCorrect(event) {
 };
 
 //Add final score to Scoreboard (local storage)
-var highScore = [{
+var highScore = {
+    name: '',
+    uScore: 0
+};
 
-}];
-var highScores = 
-//localStorage.setItem(player,score);
+function scoreValues(){
+    //window.location.href = "highscores.html";
+
+    var initials = document.getElementById('userInput');
+    highScore.name = 'fluffy';
+    console.log(initials);
+    console.log(highScore.name);
+    highScore.uScore += time;
+    console.log(highScore.uScore);
+
+};
+ 
+//localStorage.setItem('user_highScore', JSON.stringify(highScore));
+//var highScores = JSON.parse(localStorage.getItem('user_highScore'));
 
 //Event listeners
 choiceList.addEventListener('click', checkCorrect);
 startBtn.addEventListener('click', startQuiz);
+submitBtn.addEventListener('click', scoreValues);
