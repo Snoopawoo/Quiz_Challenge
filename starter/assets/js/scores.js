@@ -4,10 +4,11 @@ var clearBtn = document.querySelector('#clear')
 var scoreList = JSON.parse(localStorage.getItem('user_highScore'));
 
 //Add Scores to board
+for(i = 0; i < scoreList.length; i++){
 scoreBoard.insertAdjacentHTML('beforeend',`
-<li>${scoreList[0].user} - ${scoreList[0].uScore}</li>
+<li>${scoreList[i].user} - ${scoreList[i].uScore}</li>
 `);
-
+}
 console.log(scoreList);
 
 //Clear scoreboard function

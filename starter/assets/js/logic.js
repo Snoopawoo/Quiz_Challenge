@@ -116,19 +116,23 @@ function checkCorrect(event) {
 
 //Add final score to Scoreboard (local storage)
 var highScore= [{}];
+var highScoreall= [{}];
 var user;
 var uScore;
+
 function scoreValues(){
     window.location.href = "highscores.html";
-    document.querySelector('#initials').value;
+    highScoreall = JSON.parse(localStorage.getItem('user_highScore'));
+    console.log(highScoreall);
     user = document.querySelector('#initials').value;
     highScore[0].user = user;
     console.log(highScore);
     uScore = time;
     highScore[0].uScore = uScore;
-    console.log(highScore.uScore);
+    console.log(highScore);
+    Array.prototype.push.apply(highScore,highScoreall);
+    console.log(highScore);
     localStorage.setItem('user_highScore', JSON.stringify(highScore));
-
 };
 
 //Event listeners
