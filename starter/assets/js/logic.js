@@ -7,12 +7,13 @@ var questionLine = document.querySelector('#question-title');
 var choiceList = document.querySelector('#choices');
 var startScreen = document.querySelector('#start-screen');
 var startBtn = document.querySelector('#start');
-var submitBtn = document.querySelector('#submit')
+var submitBtn = document.querySelector('#submit');
 var feedback = document.querySelector('#feedback');
 var endScreen = document.querySelector('#end-screen');
 var finalScore = document.querySelector('#final-score');
 var time = 90;
-var timeLeft = document.querySelector('#time')
+var timeLeft = document.querySelector('#time');
+var counterId = [-1];
 victory = 0;
 timeLeft.innerText = time;
 
@@ -43,11 +44,25 @@ var timer = setInterval(function (){
 function nextQuestion() {
 
     //sets the counter to a random index to show the indexed question
-    activeQuestionIndex = Math.floor(Math.random()*numberofQuestions);
+    
+    testId();
     var activeQuestion = questions[activeQuestionIndex];
     var choices = activeQuestion.choices;
-
     choiceList.innerHTML = '';
+
+    //test and prevents question repetition
+    function testId(){
+        activeQuestionIndex = Math.floor(Math.random()*numberofQuestions);
+            if(counterId.includes(activeQuestionIndex)){
+                testId();
+            }
+            else{
+                counterId.push(activeQuestionIndex);
+                console.log(activeQuestionIndex);
+                console.log(counterId);
+                return
+            };
+    };
 
     //Shows the active question
     questionLine.innerText = activeQuestion.question;
